@@ -1,7 +1,15 @@
 const app = require("express")();
 const server = require("http").createServer(app);
-const socket = require("socket.io")(server);
+const io = require("socket.io")(server);
 
 app.get("/", (req, res) => {
-  res.sendFile(`${__dirname}/public.html`);
+  res.sendFile(`${__dirname}/public/index.html`);
+});
+
+io.on("connection", () => {
+  console.log("un utilisateur s'est connecté");
+});
+
+server.listen(3000, () => {
+  console.log("ecoute sur le port 3000");
 });
