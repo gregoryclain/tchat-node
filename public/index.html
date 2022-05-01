@@ -7,11 +7,10 @@
   <title>Tchat socket.io</title>
 </head>
 <body>
-  <div id="messages">
-    <form action="">
-      <input id="msg" autocomplete="off"><button>Send</button>
-    </form>
-  </div>
+  <div id="messages"></div>
+  <form action="">
+    <input id="msg" autocomplete="off"><button>Send</button>
+  </form>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -23,6 +22,12 @@
         $("#msg").val("");
         return false;
       })
+
+      socket.on("chat message", function(msg){
+        $("#messages").append($("<p>").text(msg))
+      })
+
+
     });
   </script>
 </body>
